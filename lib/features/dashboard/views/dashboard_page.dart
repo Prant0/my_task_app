@@ -86,9 +86,10 @@ class _DashboardPageState extends State<DashboardPage> {
   }
 
   void _setPage(int pageIndex) {
+    if (_pageIndex == pageIndex) return;
     setState(() {
-      _pageController!.jumpToPage(pageIndex);
       _pageIndex = pageIndex;
+      _pageController!.jumpToPage(pageIndex);
     });
   }
 

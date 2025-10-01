@@ -20,30 +20,49 @@ class FancyBottomBar extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Expanded(child: _item(Icons.home_rounded, 0)),
-            Expanded(child: _item(Icons.assignment_rounded, 1)),
-            Expanded(child: _item(Icons.calendar_month_rounded, 2)),
-            Expanded(child: _item(Icons.settings, 3)),
+            Expanded(child: _BottomNavItem(icon: Icons.home_rounded, index: 0, selectedIndex: index, onTap: onTap)),
+            Expanded(child: _BottomNavItem(icon: Icons.assignment_rounded, index: 1, selectedIndex: index, onTap: onTap)),
+            Expanded(child: _BottomNavItem(icon: Icons.calendar_month_rounded, index: 2, selectedIndex: index, onTap: onTap)),
+            Expanded(child: _BottomNavItem(icon: Icons.settings, index: 3, selectedIndex: index, onTap: onTap)),
           ],
         ),
       ),
     );
   }
+}
 
-  Widget _item(IconData icon, int i) {
-    final selected = index == i;
+class _BottomNavItem extends StatelessWidget {
+  final IconData icon;
+  final int index;
+  final int selectedIndex;
+  final ValueChanged<int> onTap;
+  const _BottomNavItem({required this.icon, required this.index, required this.selectedIndex, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    final selected = selectedIndex == index;
     return InkWell(
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
+      hoverColor: Colors.transparent,
+      focusColor: Colors.transparent,
       borderRadius: BorderRadius.circular(Dimensions.radiusForty),
-      onTap: () => onTap(i),
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
-        padding: EdgeInsets.symmetric(vertical: 12),
-        margin: EdgeInsets.all(Dimensions.marginSizeFive),
+      onTap: () => onTap(index),
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 12),
+        margin: const EdgeInsets.all(Dimensions.marginSizeFive),
         decoration: BoxDecoration(
           color: selected ? AppColors.chipBg : Colors.transparent,
           borderRadius: BorderRadius.circular(Dimensions.radiusForty),
         ),
-        child: Icon(icon, color: selected ? AppColors.primary : AppColors.gray),
+        child: AnimatedSwitcher(
+          duration: const Duration(milliseconds: 200),
+          child: Icon(
+            icon,
+            key: ValueKey('$index-$selected'),
+            color: selected ? AppColors.primary : AppColors.gray,
+          ),
+        ),
       ),
     );
   }
