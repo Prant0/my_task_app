@@ -19,18 +19,26 @@ class AppDatabase {
     final path = join(dbPath, 'tasks.db');
     return await openDatabase(
       path,
-      version: 1,
+      version: 2,
       onCreate: (db, version) async {
         await db.execute('''
           CREATE TABLE tasks (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             title TEXT NOT NULL,
             description TEXT,
+            priority TEXT NOT NULL DEFAULT 'medium',
+            category TEXT NOT NULL DEFAULT 'personal',
             startDate INTEGER,
             endDate INTEGER,
-            status TEXT NOT NULL
+            status TEXT NOT NULL DEFAULT 'pending'
           )
         ''');
+      },
+      onUpgrade: (db, oldVersion, newVersion) async {
+        if (oldVersion < 2) {
+          await db.execute('ALTER TABLE tasks ADD COLUMN priority TEXT DEFAULT "medium"');
+          await db.execute('ALTER TABLE tasks ADD COLUMN category TEXT DEFAULT "personal"');
+        }
       },
     );
   }

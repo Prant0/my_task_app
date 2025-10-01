@@ -23,6 +23,11 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
   TextEditingController descCtrl = TextEditingController();
   DateTime startDate = DateTime.now();
   DateTime? endDate;
+  String selectedPriority = 'medium';
+  String selectedCategory = 'personal';
+
+  final List<String> priorities = ['high', 'medium', 'low'];
+  final List<String> categories = ['work', 'personal', 'shopping'];
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +71,109 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                   inputAction: TextInputAction.done,
                 ),
                 const SizedBox(height: 10),
+
+                Text(
+                  "Priority",
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: AppColors.text,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey.shade300),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton<String>(
+                      isExpanded: true,
+                      value: selectedPriority,
+                      items: priorities.map((String priority) {
+                        return DropdownMenuItem<String>(
+                          value: priority,
+                          child: Row(
+                            children: [
+                              Container(
+                                width: 12,
+                                height: 12,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: priority == 'high'
+                                      ? Colors.red
+                                      : priority == 'medium'
+                                          ? Colors.orange
+                                          : Colors.green,
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              Text(priority[0].toUpperCase() + priority.substring(1)),
+                            ],
+                          ),
+                        );
+                      }).toList(),
+                      onChanged: (String? newValue) {
+                        if (newValue != null) {
+                          setState(() {
+                            selectedPriority = newValue;
+                          });
+                        }
+                      },
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+
+                Text(
+                  "Category",
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: AppColors.text,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey.shade300),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton<String>(
+                      isExpanded: true,
+                      value: selectedCategory,
+                      items: categories.map((String category) {
+                        return DropdownMenuItem<String>(
+                          value: category,
+                          child: Row(
+                            children: [
+                              Icon(
+                                category == 'work'
+                                    ? Icons.work
+                                    : category == 'personal'
+                                        ? Icons.person
+                                        : Icons.shopping_bag,
+                                size: 20,
+                                color: AppColors.primary,
+                              ),
+                              const SizedBox(width: 8),
+                              Text(category[0].toUpperCase() + category.substring(1)),
+                            ],
+                          ),
+                        );
+                      }).toList(),
+                      onChanged: (String? newValue) {
+                        if (newValue != null) {
+                          setState(() {
+                            selectedCategory = newValue;
+                          });
+                        }
+                      },
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
 
                 Row(
                   children: [
@@ -114,11 +222,15 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                         Task(
                           title: title,
                           description: description,
+                          priority: selectedPriority,
+                          category: selectedCategory,
                           startDate: startDate,
                           endDate: endDate ?? DateTime.now(),
-                          status: 'todo',
+                          status: 'pending',
                         ),
                       );
+                      Get.back();
+                      showCustomSnackBar('Task created successfully', isError: false);
                     }
                   },
                 ),

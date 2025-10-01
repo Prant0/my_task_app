@@ -5,7 +5,7 @@ import 'package:task_manager/utils/dimensions.dart';
 
 class CustomDatePicker extends StatelessWidget {
   final String labelText;
-  final ValueChanged<DateTime?> onPicked;
+  final Function? onPicked;
   final DateTime? selectedDate;
   const CustomDatePicker({super.key, required this.labelText, required this.onPicked, this.selectedDate});
 
@@ -27,7 +27,7 @@ class CustomDatePicker extends StatelessWidget {
             lastDate: DateTime(2101),
           );
           if (pickedDate != null) {
-            onPicked(pickedDate);
+            onPicked!(pickedDate);
           }
         },
         child: Container(

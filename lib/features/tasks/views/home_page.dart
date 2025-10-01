@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:task_manager/app_theme.dart';
 import 'package:task_manager/features/tasks/controller/task_controller.dart';
 import 'package:task_manager/features/tasks/widgets/task_card.dart';
+import 'package:task_manager/features/tasks/widgets/filter_dialog.dart';
 import 'package:task_manager/helper/date_converter.dart';
 import 'package:task_manager/utils/dimensions.dart';
 
@@ -14,6 +15,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final TextEditingController searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,12 +30,23 @@ class _HomePageState extends State<HomePage> {
             Text(DateConverter.today(), style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: Dimensions.fontSizeSixteen)),
           ],
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.filter_list, color: AppColors.primary),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) => const FilterDialog(),
+              );
+            },
+          ),
+        ],
       ),
       body: GetBuilder<TaskController>(builder: (taskController) {
 
-        final tasks = taskController.tasks;
-        final assigned = tasks?.where((t) => t.status != 'complete').toList().length;
-        final completed = tasks?.where((t) => t.status == 'complete').toList().length;
+        final tasks = taskController.filteredTasks;
+        final assigned = tasks?.where((t) => t.status == 'pending').toList() ?? [];
+        final completed = tasks?.where((t) => t.status == 'completed').toList() ?? [];
 
         return CustomScrollView(
           slivers: [
@@ -44,15 +57,55 @@ class _HomePageState extends State<HomePage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
 
+                    Container(
+                      decoration: BoxDecoration(
+                        color: AppColors.card,
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withValues(alpha: 0.03),
+                            blurRadius: 12,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: TextField(
+                        controller: searchController,
+                        onChanged: (value) {
+                          taskController.searchTasks(value);
+                        },
+                        decoration: InputDecoration(
+                          hintText: "Search tasks by name...",
+                          prefixIcon: const Icon(Icons.search, color: AppColors.textMuted),
+                          suffixIcon: searchController.text.isNotEmpty
+                              ? IconButton(
+                                  icon: const Icon(Icons.clear),
+                                  onPressed: () {
+                                    searchController.clear();
+                                    taskController.searchTasks('');
+                                  },
+                                )
+                              : null,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(12),
+                            borderSide: BorderSide.none,
+                          ),
+                          filled: true,
+                          fillColor: AppColors.card,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+
                     Text("Summary", style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: Dimensions.fontSizeTwenty)),
                     const SizedBox(height: 12),
 
                     Row(
                       children: [
-                        _summaryBox(context, "Assigned tasks", 0!, AppColors.primary),
+                        _summaryBox(context, "Pending tasks", assigned.length, AppColors.primary),
                         const SizedBox(width: 12),
 
-                        _summaryBox(context, "Completed tasks", 1!, AppColors.success),
+                        _summaryBox(context, "Completed tasks", completed.length, AppColors.success),
                       ],
                     ),
                     const SizedBox(height: 24),
@@ -71,7 +124,7 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           Expanded(child: _taskButton(
                             active: taskController.tab == 0,
-                            text: "All",
+                            text: "Pending",
                             onTap: () {
                               taskController.setTab(0);
                             },
@@ -95,9 +148,9 @@ class _HomePageState extends State<HomePage> {
             tasks != null && tasks!.isNotEmpty ? SliverPadding(
               padding: const EdgeInsets.only(left: Dimensions.paddingSizeTwenty, right: Dimensions.paddingSizeTwenty, top: Dimensions.paddingSizeTen),
               sliver: SliverList.separated(
-                itemBuilder: (_, i) => TaskCard(task: taskController.tab == 0 ? tasks[i] : tasks.where((t) => t.status == 'complete').toList()[i]),
+                itemBuilder: (_, i) => TaskCard(task: taskController.tab == 0 ? assigned[i] : completed[i]),
                 separatorBuilder: (_, __) => const SizedBox(height: 10),
-                itemCount: taskController.tab == 0 ? assigned : completed,
+                itemCount: taskController.tab == 0 ? assigned.length : completed.length,
               ),
             ) : SliverFillRemaining(
               hasScrollBody: false,

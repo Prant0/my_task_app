@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:task_manager/app_theme.dart';
 import 'package:task_manager/features/tasks/models/task.dart';
-import 'package:task_manager/features/tasks/views/view_task_page.dart';
+import 'package:task_manager/features/tasks/views/edit_task_page.dart';
 import 'package:task_manager/helper/date_converter.dart';
 import 'package:task_manager/utils/dimensions.dart';
 
@@ -12,12 +12,14 @@ class TaskCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final statusColor = task.status == 'complete' ? AppColors.success : AppColors.primary;
-    final statusText = task.status == 'complete' ? 'Complete' : 'Todo';
+    final statusColor = task.status == 'completed' ? AppColors.success : AppColors.primary;
+    final statusText = task.status == 'completed' ? 'Completed' : 'Pending';
+    final priorityColor = task.priority == 'high' ? Colors.red : task.priority == 'medium' ? Colors.orange : Colors.green;
+    final categoryIcon = task.category == 'work' ? Icons.work : task.category == 'personal' ? Icons.person : Icons.shopping_bag;
 
     return InkWell(
       onTap: () {
-        Get.to(() => ViewTaskPage(task: task));
+        Get.to(() => EditTaskPage(task: task));
       },
       child: Container(
         padding: const EdgeInsets.all(Dimensions.paddingSizeTen),
@@ -40,7 +42,66 @@ class TaskCard extends StatelessWidget {
               task.description, style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: Dimensions.fontSizeTwelve),
               maxLines: 2, overflow: TextOverflow.ellipsis,
             ),
-            const SizedBox(height: 14),
+            const SizedBox(height: 10),
+
+            Row(
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: priorityColor.withValues(alpha: 0.1),
+                    borderRadius: BorderRadius.circular(4),
+                    border: Border.all(color: priorityColor.withValues(alpha: 0.3)),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                        width: 8,
+                        height: 8,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: priorityColor,
+                        ),
+                      ),
+                      const SizedBox(width: 4),
+                      Text(
+                        task.priority[0].toUpperCase() + task.priority.substring(1),
+                        style: TextStyle(
+                          fontSize: 10,
+                          color: priorityColor,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: AppColors.chipBg,
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(categoryIcon, size: 12, color: AppColors.primary),
+                      const SizedBox(width: 4),
+                      Text(
+                        task.category[0].toUpperCase() + task.category.substring(1),
+                        style: const TextStyle(
+                          fontSize: 10,
+                          color: AppColors.text,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 10),
 
             Row(
               children: [
