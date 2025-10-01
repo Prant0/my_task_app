@@ -145,7 +145,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
 
-            tasks != null && tasks!.isNotEmpty ? SliverPadding(
+            tasks != null && tasks.isNotEmpty ? SliverPadding(
               padding: const EdgeInsets.only(left: Dimensions.paddingSizeTwenty, right: Dimensions.paddingSizeTwenty, top: Dimensions.paddingSizeTen),
               sliver: SliverList.separated(
                 itemBuilder: (_, i) => TaskCard(task: taskController.tab == 0 ? assigned[i] : completed[i]),

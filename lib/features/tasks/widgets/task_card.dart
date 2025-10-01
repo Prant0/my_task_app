@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:task_manager/app_theme.dart';
 import 'package:task_manager/features/tasks/models/task.dart';
 import 'package:task_manager/features/tasks/views/edit_task_page.dart';
+import 'package:task_manager/features/tasks/views/view_task_page.dart';
 import 'package:task_manager/helper/date_converter.dart';
 import 'package:task_manager/utils/dimensions.dart';
 
@@ -19,7 +20,7 @@ class TaskCard extends StatelessWidget {
 
     return InkWell(
       onTap: () {
-        Get.to(() => EditTaskPage(task: task));
+        Get.to(() => ViewTaskPage(task: task));
       },
       child: Container(
         padding: const EdgeInsets.all(Dimensions.paddingSizeTen),

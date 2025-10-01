@@ -56,35 +56,6 @@ class _EditTaskPageState extends State<EditTaskPage> {
       return Scaffold(
         appBar: CustomAppBar(
           title: widget.isEditing ? "Edit Task" : "View Task",
-          actionWidget: Row(
-            children: [
-              if (!widget.isEditing)
-                IconButton(
-                  icon: const Icon(Icons.edit, color: AppColors.primary),
-                  onPressed: () {
-                    Get.off(() => EditTaskPage(task: widget.task, isEditing: true));
-                  },
-                ),
-              IconButton(
-                icon: const Icon(Icons.delete, color: AppColors.error),
-                onPressed: () async {
-                  showDialog(
-                    context: context,
-                    builder: (context) => DeleteConfirmDialog(
-                      onDelete: () async {
-                        if (widget.task.id != null) {
-                          await taskController.remove(widget.task.id!);
-                          Get.back();
-                          Get.back();
-                          showCustomSnackBar("Task deleted successfully", isError: false);
-                        }
-                      },
-                    ),
-                  );
-                },
-              ),
-            ],
-          ),
         ),
         body: SingleChildScrollView(
           child: Container(

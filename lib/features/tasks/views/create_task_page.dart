@@ -182,7 +182,9 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                         labelText: "Start Date",
                         selectedDate: startDate,
                         onPicked: (date) {
-
+                          setState(() {
+                            startDate = date;
+                          });
                         },
                       ),
                     ),
@@ -192,7 +194,9 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                         labelText: "End Date",
                         selectedDate: endDate,
                         onPicked: (date) {
-
+                          setState(() {
+                            endDate = date;
+                          });
                         },
                       ),
                     ),
@@ -211,11 +215,11 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                       showCustomSnackBar('Enter your task name');
                     } else if (description.isEmpty) {
                       showCustomSnackBar('Enter your task description');
-                    } else if (startDate == null) {
+                    } /*else if (startDate == null) {
                       showCustomSnackBar('Select start date');
-                    } else if (endDate == null) {
+                    } */else if (endDate == null) {
                       showCustomSnackBar('Select end date');
-                    } else if (endDate!.isBefore(startDate!)) {
+                    } else if (endDate!.isBefore(startDate)) {
                       showCustomSnackBar('End date must be after start date');
                     } else {
                       await taskController.add(

@@ -47,7 +47,7 @@ class AllTasksPage extends StatelessWidget {
                 padding: const EdgeInsets.only(left: Dimensions.paddingSizeTwenty, right: Dimensions.paddingSizeTwenty, top: Dimensions.paddingSizeTen),
                 itemBuilder: (_, i) => TaskCard(task: tasks[i]),
                 separatorBuilder: (_, __) => const SizedBox(height: 10),
-                itemCount: tasks?.length ?? 0,
+                itemCount: tasks.length,
               ) : Center(
                 child: Text("No tasks available", style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: AppColors.textMuted)),
               ),

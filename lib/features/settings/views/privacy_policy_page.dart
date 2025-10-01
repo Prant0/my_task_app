@@ -101,8 +101,9 @@ class PrivacyPolicyPage extends StatelessWidget {
               "If you have questions about this Privacy Policy:\n\nEmail: privacy@taskmanager.com\nWebsite: www.taskmanager.com/privacy",
               Icons.email,
             ),
-            const SizedBox(height: 20),
+
             Container(
+              width: double.infinity,
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -139,6 +140,8 @@ class PrivacyPolicyPage extends StatelessWidget {
                 ],
               ),
             ),
+            const SizedBox(height: 20),
+
           ],
         ),
       ),

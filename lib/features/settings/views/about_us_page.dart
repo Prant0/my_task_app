@@ -111,6 +111,7 @@ class AboutUsPage extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             Container(
+              width: double.infinity,
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: AppColors.chipBg,
@@ -140,6 +141,8 @@ class AboutUsPage extends StatelessWidget {
                 ],
               ),
             ),
+            const SizedBox(height: 20),
+
           ],
         ),
       ),

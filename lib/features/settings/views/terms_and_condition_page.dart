@@ -92,7 +92,7 @@ class TermsAndConditionPage extends StatelessWidget {
               "10. Contact Information",
               "If you have any questions about these Terms and Conditions, please contact us at:\n\nEmail: legal@taskmanager.com\nWebsite: www.taskmanager.com/support",
             ),
-            const SizedBox(height: 20),
+
             Container(
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
@@ -125,6 +125,8 @@ class TermsAndConditionPage extends StatelessWidget {
                 ],
               ),
             ),
+            const SizedBox(height: 20),
+
           ],
         ),
       ),

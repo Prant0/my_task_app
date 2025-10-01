@@ -21,6 +21,7 @@ class SettingsPage extends StatelessWidget {
 
           SettingButton(
             title: "About Us",
+            icon: Icons.info_outline,
             onTap: () {
               Get.to(() => const AboutUsPage());
             },
@@ -29,6 +30,7 @@ class SettingsPage extends StatelessWidget {
 
           SettingButton(
             title: "Terms & Conditions",
+            icon: Icons.description,
             onTap: () {
               Get.to(() => const TermsAndConditionPage());
             },
@@ -37,6 +39,7 @@ class SettingsPage extends StatelessWidget {
 
           SettingButton(
             title: "Privacy Policy",
+            icon: Icons.shield_moon,
             onTap: () {
               Get.to(() => const PrivacyPolicyPage());
             },
@@ -50,8 +53,9 @@ class SettingsPage extends StatelessWidget {
 
 class SettingButton extends StatelessWidget {
   final String title;
+  final IconData icon;
   final VoidCallback onTap;
-  const SettingButton({super.key, required this.title, required this.onTap});
+  const SettingButton({super.key, required this.title, required this.onTap, required this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +68,7 @@ class SettingButton extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         child: Row(children: [
-          Icon(Icons.note_add, color: AppColors.primary),
+          Icon(icon, color: AppColors.primary),
           SizedBox(width: Dimensions.paddingSizeFifteen),
         
           Text(title, style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: Dimensions.fontSizeSixteen)),

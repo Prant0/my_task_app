@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:task_manager/features/tasks/models/task.dart';
 import 'package:task_manager/features/tasks/repository/task_repository.dart';
@@ -31,8 +32,10 @@ class TaskController extends GetxController implements GetxService {
       _tasks = data;
       _filteredTasks = data;
       update();
-    } catch (e, st) {
-      print(e);
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
     }
   }
 
