@@ -74,17 +74,14 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
 
                 Text(
                   "Priority",
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: AppColors.text,
-                    fontWeight: FontWeight.w500,
-                  ),
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: Dimensions.fontSizeFourteen),
                 ),
                 const SizedBox(height: 8),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 12),
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.grey.shade300),
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(Dimensions.radiusTwenty),
                   ),
                   child: DropdownButtonHideUnderline(
                     child: DropdownButton<String>(
@@ -108,7 +105,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                                 ),
                               ),
                               const SizedBox(width: 8),
-                              Text(priority[0].toUpperCase() + priority.substring(1)),
+                              Text(priority[0].toUpperCase() + priority.substring(1), style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: Dimensions.fontSizeTwelve)),
                             ],
                           ),
                         );
@@ -127,17 +124,14 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
 
                 Text(
                   "Category",
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: AppColors.text,
-                    fontWeight: FontWeight.w500,
-                  ),
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: Dimensions.fontSizeFourteen),
                 ),
                 const SizedBox(height: 8),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 12),
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.grey.shade300),
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(Dimensions.radiusTwenty),
                   ),
                   child: DropdownButtonHideUnderline(
                     child: DropdownButton<String>(
@@ -158,7 +152,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                                 color: AppColors.primary,
                               ),
                               const SizedBox(width: 8),
-                              Text(category[0].toUpperCase() + category.substring(1)),
+                              Text(category[0].toUpperCase() + category.substring(1), style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: Dimensions.fontSizeTwelve),),
                             ],
                           ),
                         );

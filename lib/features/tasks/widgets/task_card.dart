@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:task_manager/app_theme.dart';
 import 'package:task_manager/features/tasks/models/task.dart';
-import 'package:task_manager/features/tasks/views/edit_task_page.dart';
 import 'package:task_manager/features/tasks/views/view_task_page.dart';
 import 'package:task_manager/helper/date_converter.dart';
 import 'package:task_manager/utils/dimensions.dart';

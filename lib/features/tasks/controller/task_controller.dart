@@ -103,7 +103,6 @@ class TaskController extends GetxController implements GetxService {
   }
 
   void clearFilters() {
-    _searchQuery = '';
     _selectedCategory = null;
     _selectedPriority = null;
     _selectedStatus = null;
