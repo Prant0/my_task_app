@@ -58,10 +58,10 @@ class _ViewTaskPageState extends State<ViewTaskPage> {
           title: "View Task",
           actionWidget: Row(
             children: [
-              IconButton(
+              isCompleted ? SizedBox() : IconButton(
                 icon: const Icon(Icons.edit, color: AppColors.primary),
                 onPressed: () {
-                  Get.to(() => EditTaskPage(task: widget.task, isEditing: true));
+                  Get.to(() => EditTaskPage(task: widget.task));
                 },
               ),
 
@@ -236,26 +236,21 @@ class _ViewTaskPageState extends State<ViewTaskPage> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 40),
+                SizedBox(height: isCompleted ? 0 : 40),
 
-                Row(
+                isCompleted ? const SizedBox() : Row(
                   children: [
                     Expanded(
                       child: CustomButton(
-                        text: isCompleted ? "Mark as Pending" : "Mark as Completed",
-                        color: isCompleted ? AppColors.primary : AppColors.success,
+                        text: "Mark as Completed",
+                        color: AppColors.success,
                         onTap: () async {
                           await taskController.toggleTaskStatus(
                             widget.task.id!,
                             widget.task.status,
                           );
                           Get.back();
-                          showCustomSnackBar(
-                            isCompleted
-                                ? "Task marked as pending"
-                                : "Task marked as completed",
-                            isError: false,
-                          );
+                          showCustomSnackBar("Task marked as completed", isError: false);
                         },
                       ),
                     ),

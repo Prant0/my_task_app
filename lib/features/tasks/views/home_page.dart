@@ -77,15 +77,13 @@ class _HomePageState extends State<HomePage> {
                         decoration: InputDecoration(
                           hintText: "Search tasks by name...",
                           prefixIcon: const Icon(Icons.search, color: AppColors.textMuted),
-                          suffixIcon: searchController.text.isNotEmpty
-                              ? IconButton(
-                                  icon: const Icon(Icons.clear),
-                                  onPressed: () {
-                                    searchController.clear();
-                                    taskController.searchTasks('');
-                                  },
-                                )
-                              : null,
+                          suffixIcon: searchController.text.isNotEmpty ? IconButton(
+                            icon: const Icon(Icons.clear),
+                            onPressed: () {
+                              searchController.clear();
+                              taskController.searchTasks('');
+                            },
+                          ) : null,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(12),
                             borderSide: BorderSide.none,

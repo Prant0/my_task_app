@@ -226,7 +226,16 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                           endDate: endDate ?? DateTime.now(),
                           status: 'pending',
                         ),
-                      );
+                      ).then((value) {
+                        titleCtrl.clear();
+                        descCtrl.clear();
+                        setState(() {
+                          startDate = DateTime.now();
+                          endDate = null;
+                          selectedPriority = 'medium';
+                          selectedCategory = 'personal';
+                        });
+                      });
                       Get.back();
                       showCustomSnackBar('Task created successfully', isError: false);
                     }

@@ -21,6 +21,18 @@ class TaskController extends GetxController implements GetxService {
   String? _selectedPriority;
   String? _selectedStatus;
 
+  void printQuery() {
+    if (kDebugMode) {
+      print('_searchQuery: $_searchQuery _selectedCategory: $_selectedCategory _selectedPriority: $_selectedPriority _selectedStatus: $_selectedStatus');
+    }
+  }
+
+  @override
+  void onInit() {
+    super.onInit();
+    load();
+  }
+
   void setTab(int value) {
     _tab = value;
     update();
