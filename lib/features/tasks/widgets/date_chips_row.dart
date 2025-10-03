@@ -40,7 +40,7 @@ class _DateChipsRowState extends State<DateChipsRow> {
     // Horizontal padding of ListView
     const double horizontalPadding = 10;
 
-    // 1. Start with the ListView’s left padding
+    // 1. Start with the ListView's left padding
     double offset = horizontalPadding;
 
     // 2. Add widths + spacings for all items BEFORE selected
@@ -53,13 +53,19 @@ class _DateChipsRowState extends State<DateChipsRow> {
     final screenWidth = MediaQuery.of(context).size.width;
     offset -= screenWidth / 2;
 
-    // 5. Clamp so it doesn’t overshoot
+    // 5. Clamp so it doesn't overshoot
     offset = offset.clamp(
       _scrollController.position.minScrollExtent,
       _scrollController.position.maxScrollExtent,
     );
 
     _scrollController.jumpTo(offset);
+  }
+
+  String _getDayName(int weekday) {
+    // DateTime.weekday: Monday=1, Tuesday=2, ..., Sunday=7
+    const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    return days[weekday - 1];
   }
 
   @override
@@ -97,7 +103,7 @@ class _DateChipsRowState extends State<DateChipsRow> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  ['Fri', 'Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu'][d.weekday % 7],
+                  _getDayName(d.weekday),
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: isSel ? Colors.white : AppColors.primary,
                     fontSize: Dimensions.fontSizeTen,
@@ -119,5 +125,3 @@ class _DateChipsRowState extends State<DateChipsRow> {
     );
   }
 }
-
-
