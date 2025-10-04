@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:task_manager/app_theme.dart';
-import 'package:task_manager/helper/date_converter.dart';
-import 'package:task_manager/utils/dimensions.dart';
+import 'package:habiba_task_manager/app_theme.dart';
+import 'package:habiba_task_manager/helper/date_converter.dart';
+import 'package:habiba_task_manager/utils/dimensions.dart';
 
 class CustomDatePicker extends StatelessWidget {
   final String labelText;
@@ -34,14 +34,14 @@ class CustomDatePicker extends StatelessWidget {
           width: double.infinity,
           padding: EdgeInsets.symmetric(horizontal: Dimensions.paddingSizeFifteen, vertical: Dimensions.paddingSizeFifteen),
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(Dimensions.radiusTwenty),
+            borderRadius: BorderRadius.circular(Dimensions.radiusTen),
             border: Border.all(color: AppColors.bg),
           ),
           child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
             Expanded(
               child: Text(
                 selectedDate != null ? DateConverter.formatDate(selectedDate!) : "Select Date",
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: Dimensions.fontSizeTwelve),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: Dimensions.fontSizeTwelve, color: selectedDate != null ? AppColors.text : AppColors.textMuted),
                 overflow: TextOverflow.ellipsis, maxLines: 1,
               ),
             ),

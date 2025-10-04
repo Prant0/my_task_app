@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:task_manager/app_theme.dart';
-import 'package:task_manager/common/widgets/custom_app_bar.dart';
-import 'package:task_manager/features/settings/views/about_us_page.dart';
-import 'package:task_manager/features/settings/views/privacy_policy_page.dart';
-import 'package:task_manager/features/settings/views/terms_and_condition_page.dart';
-import 'package:task_manager/utils/dimensions.dart';
+import 'package:habiba_task_manager/app_theme.dart';
+import 'package:habiba_task_manager/common/widgets/custom_app_bar.dart';
+import 'package:habiba_task_manager/features/settings/views/about_us_page.dart';
+import 'package:habiba_task_manager/features/settings/views/privacy_policy_page.dart';
+import 'package:habiba_task_manager/features/settings/views/terms_and_condition_page.dart';
+import 'package:habiba_task_manager/utils/dimensions.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});

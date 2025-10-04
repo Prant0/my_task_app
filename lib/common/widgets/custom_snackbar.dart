@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:task_manager/utils/dimensions.dart';
+import 'package:habiba_task_manager/utils/dimensions.dart';
 
   void showCustomSnackBar(String? message, {bool isError = true}) {
   if(message != null && message.isNotEmpty) {

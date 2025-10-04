@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:task_manager/common/widgets/custom_app_bar.dart';
-import 'package:task_manager/common/widgets/custom_snackbar.dart';
-import 'package:task_manager/features/tasks/controller/task_controller.dart';
-import 'package:task_manager/features/tasks/views/edit_task_page.dart';
-import 'package:task_manager/utils/dimensions.dart';
-import 'package:task_manager/app_theme.dart';
-import 'package:task_manager/common/widgets/custom_button.dart';
-import 'package:task_manager/common/widgets/custom_date_picker.dart';
-import 'package:task_manager/common/widgets/custom_text_field.dart';
-import 'package:task_manager/features/tasks/models/task.dart';
+import 'package:habiba_task_manager/common/widgets/custom_app_bar.dart';
+import 'package:habiba_task_manager/common/widgets/custom_snackbar.dart';
+import 'package:habiba_task_manager/features/tasks/controller/task_controller.dart';
+import 'package:habiba_task_manager/features/tasks/views/edit_task_page.dart';
+import 'package:habiba_task_manager/utils/dimensions.dart';
+import 'package:habiba_task_manager/app_theme.dart';
+import 'package:habiba_task_manager/common/widgets/custom_button.dart';
+import 'package:habiba_task_manager/common/widgets/custom_date_picker.dart';
+import 'package:habiba_task_manager/common/widgets/custom_text_field.dart';
+import 'package:habiba_task_manager/features/tasks/models/task.dart';
 
 class ViewTaskPage extends StatefulWidget {
   final Task task;

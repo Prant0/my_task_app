@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:task_manager/app_theme.dart';
-import 'package:task_manager/utils/dimensions.dart';
+import 'package:habiba_task_manager/app_theme.dart';
+import 'package:habiba_task_manager/utils/dimensions.dart';
 
 class CustomTextField extends StatelessWidget {
   final String? hintText;
@@ -62,7 +62,7 @@ class CustomTextField extends StatelessWidget {
         textInputAction: inputAction,
         maxLines: maxLines,
         enabled: isEnabled,
-        style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: Dimensions.fontSizeTwelve),
+        style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: Dimensions.fontSizeTwelve, color: AppColors.text),
         decoration: InputDecoration(
           hintStyle: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: Dimensions.fontSizeTwelve),
           hintText: hintText,
@@ -85,7 +85,7 @@ class CustomTextField extends StatelessWidget {
 
   OutlineInputBorder border () {
     return OutlineInputBorder(
-      borderRadius: const BorderRadius.all(Radius.circular(Dimensions.radiusTwenty)),
+      borderRadius: const BorderRadius.all(Radius.circular(Dimensions.radiusTen)),
       borderSide: BorderSide(width: 1, color: AppColors.bg),
     );
   }

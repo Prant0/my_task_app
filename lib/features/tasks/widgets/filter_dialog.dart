@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:task_manager/app_theme.dart';
-import 'package:task_manager/features/tasks/controller/task_controller.dart';
+import 'package:habiba_task_manager/app_theme.dart';
+import 'package:habiba_task_manager/features/tasks/controller/task_controller.dart';
 
 class FilterDialog extends StatefulWidget {
-  const FilterDialog({super.key});
+  final String? currentCategory;
+  final String? currentPriority;
+  final String? currentStatus;
+
+  const FilterDialog({
+    super.key,
+    this.currentCategory,
+    this.currentPriority,
+    this.currentStatus,
+  });
 
   @override
   State<FilterDialog> createState() => _FilterDialogState();
@@ -20,6 +29,14 @@ class _FilterDialogState extends State<FilterDialog> {
   final List<String> statuses = ['All', 'pending', 'completed'];
 
   @override
+  void initState() {
+    super.initState();
+    selectedCategory = widget.currentCategory;
+    selectedPriority = widget.currentPriority;
+    selectedStatus = widget.currentStatus;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return GetBuilder<TaskController>(builder: (taskController) {
       return AlertDialog(
@@ -29,7 +46,9 @@ class _FilterDialogState extends State<FilterDialog> {
             const Text("Filter Tasks"),
             IconButton(
               icon: const Icon(Icons.close),
-              onPressed: () => Navigator.pop(context),
+              onPressed: () {
+                Navigator.pop(context);
+              },
             ),
           ],
         ),
@@ -59,8 +78,8 @@ class _FilterDialogState extends State<FilterDialog> {
                             category == 'work'
                                 ? Icons.work
                                 : category == 'personal'
-                                    ? Icons.person
-                                    : Icons.shopping_bag,
+                                ? Icons.person
+                                : Icons.shopping_bag,
                             size: 16,
                           ),
                         if (category != 'All') const SizedBox(width: 4),
@@ -96,10 +115,10 @@ class _FilterDialogState extends State<FilterDialog> {
                   final priorityColor = priority == 'high'
                       ? Colors.red
                       : priority == 'medium'
-                          ? Colors.orange
-                          : priority == 'low'
-                              ? Colors.green
-                              : AppColors.primary;
+                      ? Colors.orange
+                      : priority == 'low'
+                      ? Colors.green
+                      : AppColors.primary;
                   return FilterChip(
                     label: Row(
                       mainAxisSize: MainAxisSize.min,
@@ -146,8 +165,8 @@ class _FilterDialogState extends State<FilterDialog> {
                   final statusColor = status == 'completed'
                       ? AppColors.success
                       : status == 'pending'
-                          ? AppColors.primary
-                          : AppColors.text;
+                      ? AppColors.primary
+                      : AppColors.text;
                   return FilterChip(
                     label: Text(status == 'All'
                         ? status
@@ -169,8 +188,12 @@ class _FilterDialogState extends State<FilterDialog> {
         actions: [
           TextButton(
             onPressed: () {
+              setState(() {
+                selectedCategory = null;
+                selectedPriority = null;
+                selectedStatus = null;
+              });
               taskController.clearFilters();
-              Navigator.pop(context);
             },
             child: const Text("Clear All"),
           ),

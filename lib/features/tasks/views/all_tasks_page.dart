@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:task_manager/app_theme.dart';
-import 'package:task_manager/common/widgets/custom_app_bar.dart';
-import 'package:task_manager/features/tasks/controller/task_controller.dart';
-import 'package:task_manager/features/tasks/views/create_task_page.dart';
-import 'package:task_manager/features/tasks/widgets/date_chips_row.dart';
-import 'package:task_manager/features/tasks/widgets/task_card.dart';
-import 'package:task_manager/utils/dimensions.dart';
+import 'package:habiba_task_manager/app_theme.dart';
+import 'package:habiba_task_manager/common/widgets/custom_app_bar.dart';
+import 'package:habiba_task_manager/features/tasks/controller/task_controller.dart';
+import 'package:habiba_task_manager/features/tasks/views/create_task_page.dart';
+import 'package:habiba_task_manager/features/tasks/widgets/date_chips_row.dart';
+import 'package:habiba_task_manager/features/tasks/widgets/task_card.dart';
+import 'package:habiba_task_manager/utils/dimensions.dart';
 
 class AllTasksPage extends StatelessWidget {
   const AllTasksPage({super.key});

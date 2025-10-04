@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
-import 'package:task_manager/features/tasks/models/task.dart';
-import 'package:task_manager/features/tasks/repository/task_repository.dart';
+import 'package:habiba_task_manager/features/tasks/models/task.dart';
+import 'package:habiba_task_manager/features/tasks/repository/task_repository.dart';
 
 class TaskController extends GetxController implements GetxService {
   final TaskRepository taskRepository;
@@ -21,11 +21,9 @@ class TaskController extends GetxController implements GetxService {
   String? _selectedPriority;
   String? _selectedStatus;
 
-  void printQuery() {
-    if (kDebugMode) {
-      print('_searchQuery: $_searchQuery _selectedCategory: $_selectedCategory _selectedPriority: $_selectedPriority _selectedStatus: $_selectedStatus');
-    }
-  }
+  String? get selectedCategory => _selectedCategory;
+  String? get selectedPriority => _selectedPriority;
+  String? get selectedStatus => _selectedStatus;
 
   @override
   void onInit() {
@@ -42,7 +40,8 @@ class TaskController extends GetxController implements GetxService {
     try {
       final data = await taskRepository.getAll();
       _tasks = data;
-      _filteredTasks = data;
+      // Apply existing filters and search after loading
+      _applyFiltersAndSearch();
       update();
     } catch (e) {
       if (kDebugMode) {
@@ -53,33 +52,44 @@ class TaskController extends GetxController implements GetxService {
 
   Future<void> searchTasks(String query) async {
     _searchQuery = query;
-    if (query.isEmpty) {
-      _filteredTasks = _tasks;
-    } else {
-      _filteredTasks = await taskRepository.searchTasks(query);
-    }
+    _applyFiltersAndSearch();
     update();
   }
 
-  Future<void> filterTasks({
-    String? category,
-    String? priority,
-    String? status,
-  }) async {
+  Future<void> filterTasks({String? category, String? priority, String? status}) async {
     _selectedCategory = category;
     _selectedPriority = priority;
     _selectedStatus = status;
 
-    if (category == null && priority == null && status == null) {
-      _filteredTasks = _tasks;
-    } else {
-      _filteredTasks = await taskRepository.getTasksByFilter(
-        category: category,
-        priority: priority,
-        status: status,
-      );
-    }
+    _applyFiltersAndSearch();
     update();
+  }
+
+  void _applyFiltersAndSearch() {
+    if (_tasks == null) return;
+
+    List<Task> result = List.from(_tasks!);
+
+    // Apply filters first
+    if (_selectedCategory != null || _selectedPriority != null || _selectedStatus != null) {
+      result = result.where((task) {
+        bool matchesCategory = _selectedCategory == null || task.category == _selectedCategory;
+        bool matchesPriority = _selectedPriority == null || task.priority == _selectedPriority;
+        bool matchesStatus = _selectedStatus == null || task.status == _selectedStatus;
+
+        return matchesCategory || matchesPriority || matchesStatus;
+      }).toList();
+    }
+
+    // Apply search query
+    if (_searchQuery.isNotEmpty) {
+      result = result.where((task) {
+        return task.title.toLowerCase().contains(_searchQuery.toLowerCase()) ||
+            (task.description.toLowerCase().contains(_searchQuery.toLowerCase()));
+      }).toList();
+    }
+
+    _filteredTasks = result;
   }
 
   Future<void> toggleTaskStatus(int id, String currentStatus) async {
@@ -107,17 +117,18 @@ class TaskController extends GetxController implements GetxService {
   }
 
   List<Task> getPendingTasks() {
-    return tasks?.where((task) => task.status == 'pending').toList() ?? [];
+    return filteredTasks?.where((task) => task.status == 'pending').toList() ?? [];
   }
 
   List<Task> getCompletedTasks() {
-    return tasks?.where((task) => task.status == 'completed').toList() ?? [];
+    return filteredTasks?.where((task) => task.status == 'completed').toList() ?? [];
   }
 
   void clearFilters() {
     _selectedCategory = null;
     _selectedPriority = null;
     _selectedStatus = null;
+    _searchQuery = '';
     _filteredTasks = _tasks;
     update();
   }

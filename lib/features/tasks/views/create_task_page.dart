@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:task_manager/app_theme.dart';
-import 'package:task_manager/common/widgets/custom_app_bar.dart';
-import 'package:task_manager/common/widgets/custom_button.dart';
-import 'package:task_manager/common/widgets/custom_date_picker.dart';
-import 'package:task_manager/common/widgets/custom_snackbar.dart';
-import 'package:task_manager/common/widgets/custom_text_field.dart';
-import 'package:task_manager/features/tasks/controller/task_controller.dart';
-import 'package:task_manager/features/tasks/models/task.dart';
-import 'package:task_manager/utils/dimensions.dart';
+import 'package:habiba_task_manager/app_theme.dart';
+import 'package:habiba_task_manager/common/widgets/custom_app_bar.dart';
+import 'package:habiba_task_manager/common/widgets/custom_button.dart';
+import 'package:habiba_task_manager/common/widgets/custom_date_picker.dart';
+import 'package:habiba_task_manager/common/widgets/custom_snackbar.dart';
+import 'package:habiba_task_manager/common/widgets/custom_text_field.dart';
+import 'package:habiba_task_manager/features/tasks/controller/task_controller.dart';
+import 'package:habiba_task_manager/features/tasks/models/task.dart';
+import 'package:habiba_task_manager/utils/dimensions.dart';
 
 class CreateTaskPage extends StatefulWidget {
   const CreateTaskPage({super.key});
@@ -81,7 +81,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                   padding: const EdgeInsets.symmetric(horizontal: 12),
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.grey.shade300),
-                    borderRadius: BorderRadius.circular(Dimensions.radiusTwenty),
+                    borderRadius: BorderRadius.circular(Dimensions.radiusTen),
                   ),
                   child: DropdownButtonHideUnderline(
                     child: DropdownButton<String>(
@@ -105,7 +105,8 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                                 ),
                               ),
                               const SizedBox(width: 8),
-                              Text(priority[0].toUpperCase() + priority.substring(1), style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: Dimensions.fontSizeTwelve)),
+                              Text(priority[0].toUpperCase() + priority.substring(1),
+                                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: Dimensions.fontSizeTwelve, color: AppColors.text)),
                             ],
                           ),
                         );
@@ -131,7 +132,7 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                   padding: const EdgeInsets.symmetric(horizontal: 12),
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.grey.shade300),
-                    borderRadius: BorderRadius.circular(Dimensions.radiusTwenty),
+                    borderRadius: BorderRadius.circular(Dimensions.radiusTen),
                   ),
                   child: DropdownButtonHideUnderline(
                     child: DropdownButton<String>(
@@ -152,7 +153,8 @@ class _CreateTaskPageState extends State<CreateTaskPage> {
                                 color: AppColors.primary,
                               ),
                               const SizedBox(width: 8),
-                              Text(category[0].toUpperCase() + category.substring(1), style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: Dimensions.fontSizeTwelve),),
+                              Text(category[0].toUpperCase() + category.substring(1),
+                                style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: Dimensions.fontSizeTwelve, color: AppColors.text)),
                             ],
                           ),
                         );

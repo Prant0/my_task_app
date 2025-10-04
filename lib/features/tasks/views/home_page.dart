@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:task_manager/app_theme.dart';
-import 'package:task_manager/features/tasks/controller/task_controller.dart';
-import 'package:task_manager/features/tasks/widgets/task_card.dart';
-import 'package:task_manager/features/tasks/widgets/filter_dialog.dart';
-import 'package:task_manager/helper/date_converter.dart';
-import 'package:task_manager/utils/dimensions.dart';
+import 'package:habiba_task_manager/app_theme.dart';
+import 'package:habiba_task_manager/features/tasks/controller/task_controller.dart';
+import 'package:habiba_task_manager/features/tasks/widgets/task_card.dart';
+import 'package:habiba_task_manager/features/tasks/widgets/filter_dialog.dart';
+import 'package:habiba_task_manager/helper/date_converter.dart';
+import 'package:habiba_task_manager/utils/dimensions.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -15,40 +15,46 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
   final TextEditingController searchController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: AppColors.bg,
-        surfaceTintColor: AppColors.bg,
-        automaticallyImplyLeading: false,
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(DateConverter.greeting(), style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: Dimensions.fontSizeTwelve)),
-            Text(DateConverter.today(), style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: Dimensions.fontSizeSixteen)),
+    return GetBuilder<TaskController>(builder: (taskController) {
+
+      final tasks = taskController.filteredTasks;
+      final assigned = tasks?.where((t) => t.status == 'pending').toList() ?? [];
+      final completed = tasks?.where((t) => t.status == 'completed').toList() ?? [];
+
+      return Scaffold(
+        appBar: AppBar(
+          backgroundColor: AppColors.bg,
+          surfaceTintColor: AppColors.bg,
+          automaticallyImplyLeading: false,
+          title: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(DateConverter.greeting(), style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontSize: Dimensions.fontSizeTwelve)),
+              Text(DateConverter.today(), style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: Dimensions.fontSizeSixteen)),
+            ],
+          ),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.filter_list, color: AppColors.primary),
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => FilterDialog(
+                    currentCategory: taskController.selectedCategory,
+                    currentPriority: taskController.selectedPriority,
+                    currentStatus: taskController.selectedStatus,
+                  ),
+                );
+              },
+            ),
           ],
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.filter_list, color: AppColors.primary),
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (context) => const FilterDialog(),
-              );
-            },
-          ),
-        ],
-      ),
-      body: GetBuilder<TaskController>(builder: (taskController) {
-
-        final tasks = taskController.filteredTasks;
-        final assigned = tasks?.where((t) => t.status == 'pending').toList() ?? [];
-        final completed = tasks?.where((t) => t.status == 'completed').toList() ?? [];
-
-        return CustomScrollView(
+        body: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(
               child: Padding(
@@ -106,7 +112,7 @@ class _HomePageState extends State<HomePage> {
                         _summaryBox(context, "Completed tasks", completed.length, AppColors.success),
                       ],
                     ),
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 20),
 
                     Text("Today tasks", style: Theme.of(context).textTheme.titleMedium?.copyWith(fontSize: Dimensions.fontSizeTwenty)),
                     const SizedBox(height: 8),
@@ -158,9 +164,9 @@ class _HomePageState extends State<HomePage> {
             ),
             const SliverToBoxAdapter(child: SizedBox(height: 10)),
           ],
-        );
-      }),
-    );
+        ),
+      );
+    });
   }
 
   Widget _summaryBox(BuildContext c, String label, int value, Color color) {

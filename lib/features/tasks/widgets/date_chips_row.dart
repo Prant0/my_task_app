@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:task_manager/app_theme.dart';
-import 'package:task_manager/utils/dimensions.dart';
+import 'package:habiba_task_manager/app_theme.dart';
+import 'package:habiba_task_manager/utils/dimensions.dart';
 
 class DateChipsRow extends StatefulWidget {
   const DateChipsRow({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:task_manager/app_theme.dart';
-import 'package:task_manager/common/widgets/custom_app_bar.dart';
-import 'package:task_manager/utils/dimensions.dart';
+import 'package:habiba_task_manager/app_theme.dart';
+import 'package:habiba_task_manager/common/widgets/custom_app_bar.dart';
+import 'package:habiba_task_manager/utils/dimensions.dart';
 
 class PrivacyPolicyPage extends StatelessWidget {
   const PrivacyPolicyPage({super.key});

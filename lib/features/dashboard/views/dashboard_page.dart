@@ -2,13 +2,13 @@ import 'dart:async';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:task_manager/app_theme.dart';
-import 'package:task_manager/features/dashboard/widgets/bottom_nav.dart';
-import 'package:task_manager/features/settings/views/settings_screen.dart';
-import 'package:task_manager/features/tasks/views/all_tasks_page.dart';
-import 'package:task_manager/features/tasks/views/create_task_page.dart';
-import 'package:task_manager/features/tasks/views/home_page.dart';
-import 'package:task_manager/utils/dimensions.dart';
+import 'package:habiba_task_manager/app_theme.dart';
+import 'package:habiba_task_manager/features/dashboard/widgets/bottom_nav.dart';
+import 'package:habiba_task_manager/features/settings/views/settings_screen.dart';
+import 'package:habiba_task_manager/features/tasks/views/all_tasks_page.dart';
+import 'package:habiba_task_manager/features/tasks/views/create_task_page.dart';
+import 'package:habiba_task_manager/features/tasks/views/home_page.dart';
+import 'package:habiba_task_manager/utils/dimensions.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({super.key});
