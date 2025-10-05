@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:habiba_task_manager/app_theme.dart';
 import 'package:habiba_task_manager/common/widgets/custom_app_bar.dart';
+import 'package:habiba_task_manager/utils/app_constants.dart';
 import 'package:habiba_task_manager/utils/dimensions.dart';
 
 class TermsAndConditionPage extends StatelessWidget {
@@ -31,7 +32,7 @@ class TermsAndConditionPage extends StatelessWidget {
                   const SizedBox(width: 12),
                   Expanded(
                     child: Text(
-                      "Last updated: January 1, 2025",
+                      'Last updated: ${DateTime.now().year}-${DateTime.now().month.toString().padLeft(2, '0')}-${DateTime.now().day.toString().padLeft(2, '0')}',
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                         color: AppColors.primary,
                         fontWeight: FontWeight.w500,
@@ -45,12 +46,12 @@ class TermsAndConditionPage extends StatelessWidget {
             _buildSection(
               context,
               "1. Acceptance of Terms",
-              "By downloading, installing, or using the Task Manager application, you agree to be bound by these Terms and Conditions. If you do not agree to these terms, please do not use the application.",
+              "By downloading, installing, or using the ${AppConstants.appName} application, you agree to be bound by these Terms and Conditions. If you do not agree to these terms, please do not use the application.",
             ),
             _buildSection(
               context,
               "2. Use License",
-              "We grant you a limited, non-exclusive, non-transferable license to use the Task Manager application for personal, non-commercial purposes. You may not:\n\n• Modify, reverse engineer, or decompile the application\n• Use the application for any illegal or unauthorized purpose\n• Remove any copyright or proprietary notices",
+              "We grant you a limited, non-exclusive, non-transferable license to use the ${AppConstants.appName} application for personal, non-commercial purposes. You may not:\n\n• Modify, reverse engineer, or decompile the application\n• Use the application for any illegal or unauthorized purpose\n• Remove any copyright or proprietary notices",
             ),
             _buildSection(
               context,
@@ -60,12 +61,12 @@ class TermsAndConditionPage extends StatelessWidget {
             _buildSection(
               context,
               "4. Privacy",
-              "Your privacy is important to us. The Task Manager application:\n\n• Does not collect personal information\n• Stores all data locally on your device\n• Does not share data with third parties\n• Does not require internet connection for core functionality",
+              "Your privacy is important to us. The ${AppConstants.appName} application:\n\n• Does not collect personal information\n• Stores all data locally on your device\n• Does not share data with third parties\n• Does not require internet connection for core functionality",
             ),
             _buildSection(
               context,
               "5. Limitations of Liability",
-              "The Task Manager application is provided \"as is\" without warranties of any kind. We are not liable for:\n\n• Any loss of data\n• Interruption of service\n• Any damages arising from the use of the application\n• Any indirect, incidental, or consequential damages",
+              "The ${AppConstants.appName} application is provided \"as is\" without warranties of any kind. We are not liable for:\n\n• Any loss of data\n• Interruption of service\n• Any damages arising from the use of the application\n• Any indirect, incidental, or consequential damages",
             ),
             _buildSection(
               context,
@@ -90,7 +91,7 @@ class TermsAndConditionPage extends StatelessWidget {
             _buildSection(
               context,
               "10. Contact Information",
-              "If you have any questions about these Terms and Conditions, please contact us at:\n\nEmail: legal@taskmanager.com\nWebsite: www.taskmanager.com/support",
+              "If you have any questions about these Terms and Conditions, please contact us at:\n\nEmail: support@habibaenterprise.com\nWebsite: https://habibaenterprise.com",
             ),
 
             Container(
@@ -108,7 +109,7 @@ class TermsAndConditionPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    "Thank you for using Task Manager!",
+                    "Thank you for using ${AppConstants.appName}!",
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),

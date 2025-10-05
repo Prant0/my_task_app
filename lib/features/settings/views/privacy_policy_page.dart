@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:habiba_task_manager/app_theme.dart';
 import 'package:habiba_task_manager/common/widgets/custom_app_bar.dart';
+import 'package:habiba_task_manager/utils/app_constants.dart';
 import 'package:habiba_task_manager/utils/dimensions.dart';
 
 class PrivacyPolicyPage extends StatelessWidget {
@@ -41,7 +42,7 @@ class PrivacyPolicyPage extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          "Effective Date: January 1, 2025",
+                          'Effective Date: ${DateTime.now().year}-${DateTime.now().month.toString().padLeft(2, '0')}-${DateTime.now().day.toString().padLeft(2, '0')}',
                           style: Theme.of(context).textTheme.bodySmall?.copyWith(
                             color: AppColors.success,
                           ),
@@ -56,13 +57,13 @@ class PrivacyPolicyPage extends StatelessWidget {
             _buildSection(
               context,
               "Introduction",
-              "Task Manager is committed to protecting your privacy. This Privacy Policy explains how we handle information when you use our Task Manager mobile application.",
+              "${AppConstants.appName} is committed to protecting your privacy. This Privacy Policy explains how we handle information when you use our ${AppConstants.appName} mobile application.",
               Icons.info_outline,
             ),
             _buildSection(
               context,
               "Information We DON'T Collect",
-              "Our Task Manager app is designed with privacy in mind:\n\n• We do NOT collect any personal information\n• We do NOT track your location\n• We do NOT access your contacts\n• We do NOT require account registration\n• We do NOT store data on remote servers\n• We do NOT share data with third parties\n• We do NOT use analytics or tracking tools",
+              "Our ${AppConstants.appName} app is designed with privacy in mind:\n\n• We do NOT collect any personal information\n• We do NOT track your location\n• We do NOT access your contacts\n• We do NOT require account registration\n• We do NOT store data on remote servers\n• We do NOT share data with third parties\n• We do NOT use analytics or tracking tools",
               Icons.block,
             ),
             _buildSection(
@@ -86,7 +87,7 @@ class PrivacyPolicyPage extends StatelessWidget {
             _buildSection(
               context,
               "Children's Privacy",
-              "Our Task Manager app does not:\n\n• Knowingly collect information from children under 13\n• Market to children\n• Require age verification (as we don't collect any data)\n\nThe app can be safely used by all ages as no data leaves the device.",
+              "Our ${AppConstants.appName} app does not:\n\n• Knowingly collect information from children under 13\n• Market to children\n• Require age verification (as we don't collect any data)\n\nThe app can be safely used by all ages as no data leaves the device.",
               Icons.child_care,
             ),
             _buildSection(
@@ -98,7 +99,7 @@ class PrivacyPolicyPage extends StatelessWidget {
             _buildSection(
               context,
               "Contact Us",
-              "If you have questions about this Privacy Policy:\n\nEmail: privacy@taskmanager.com\nWebsite: www.taskmanager.com/privacy",
+              "If you have questions about this Privacy Policy:\n\nEmail: support@habibaenterprise.com\nWebsite: https://habibaenterprise.com",
               Icons.email,
             ),
 

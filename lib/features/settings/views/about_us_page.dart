@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:habiba_task_manager/app_theme.dart';
 import 'package:habiba_task_manager/common/widgets/custom_app_bar.dart';
+import 'package:habiba_task_manager/utils/app_constants.dart';
 import 'package:habiba_task_manager/utils/dimensions.dart';
 
 class AboutUsPage extends StatelessWidget {
@@ -33,7 +34,7 @@ class AboutUsPage extends StatelessWidget {
             const SizedBox(height: 20),
             Center(
               child: Text(
-                "Task Manager",
+                AppConstants.appName,
                 style: Theme.of(context).textTheme.titleLarge?.copyWith(
                   color: AppColors.primary,
                   fontWeight: FontWeight.bold,
@@ -42,7 +43,7 @@ class AboutUsPage extends StatelessWidget {
             ),
             Center(
               child: Text(
-                "Version 1.0.0",
+                "Version ${AppConstants.appVersion}",
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                   color: AppColors.textMuted,
                 ),
@@ -73,7 +74,7 @@ class AboutUsPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 12),
                   Text(
-                    "Task Manager is your ultimate productivity companion, designed to help you organize, prioritize, and accomplish your daily tasks with ease. Whether you're managing work projects, personal goals, or shopping lists, our app provides the tools you need to stay on track.",
+                    "${AppConstants.appName} is your ultimate productivity companion, designed to help you organize, prioritize, and accomplish your daily tasks with ease. Whether you're managing work projects, personal goals, or shopping lists, our app provides the tools you need to stay on track.",
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       height: 1.5,
                     ),
@@ -133,7 +134,7 @@ class AboutUsPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    "support@taskmanager.com",
+                    "support@habibaenterprise.com",
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: AppColors.primary,
                     ),

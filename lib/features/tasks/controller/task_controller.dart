@@ -77,7 +77,7 @@ class TaskController extends GetxController implements GetxService {
         bool matchesPriority = _selectedPriority == null || task.priority == _selectedPriority;
         bool matchesStatus = _selectedStatus == null || task.status == _selectedStatus;
 
-        return matchesCategory || matchesPriority || matchesStatus;
+        return matchesCategory && matchesPriority && matchesStatus;
       }).toList();
     }
 
